@@ -1,10 +1,26 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false,
+  "trailingSlash": true,
   "rewrites": [
     {
       "source": "/assets/(.*)",
       "destination": "/frontend/assets/$1"
+    },
+    {
+      "source": "/admin/",
+      "destination": "/frontend/admin/index.html"
+    },
+    {
+      "source": "/admin/style.css",
+      "destination": "/frontend/admin/style.css"
+    },
+    {
+      "source": "/admin/admin.js",
+      "destination": "/frontend/admin/admin.js"
+    },
+    {
+      "source": "/admin/security.js",
+      "destination": "/frontend/admin/security.js"
     },
     {
       "source": "/uploads/(.*)",
