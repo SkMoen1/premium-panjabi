@@ -1,0 +1,150 @@
+{
+  "topBar": {
+    "discount": "ঈদ স্পেশাল ডিসকাউন্ট! প্রতিটি পাঞ্জাবিতে সর্বোচ্চ ৩০% ছাড়।",
+    "phone": "+৮৮০ ১২৩৪ ৫৬৭ ৮৯০"
+  },
+  "logo": {
+    "accent": "Premium",
+    "text": "Panjabi",
+    "brandLogo": "https://static.vecteezy.com/system/resources/thumbnails/057/068/323/small/single-fresh-red-strawberry-on-table-green-background-food-fruit-sweet-macro-juicy-plant-image-photo.jpg"
+  },
+  "heroSlides": [
+    {
+      "bg": "linear-gradient(135deg, #fff9c4 0%, #fffde7 100%)",
+      "badge": "সেরা কালেকশন ২০২৪",
+      "title": "বিলাসবহুল",
+      "highlight": "প্রিমিয়াম কটন",
+      "desc": "১০০% পিওর কটন ফেব্রিক এবং আরামদায়ক ডিজাইনে আপনার ঈদ হোক আরও আনন্দময়। নিখুঁত সেলাই ও সেরা মানের নিশ্চয়তা।",
+      "img": "assets/solid-cotton.webp",
+      "btn1Text": "এখনই শপিং করুন",
+      "btn1Link": "#collection",
+      "btn2Text": "বিস্তারিত দেখুন",
+      "btn2Link": "#about"
+    },
+    {
+      "bg": "linear-gradient(135deg, #fce4ec 0%, #fdf2f2 100%)",
+      "badge": "আভিজাত্যের প্রতীক",
+      "title": "রাজকীয়",
+      "highlight": "জ্যাকার্ড সিল্ক",
+      "desc": "বিশেষ অনুষ্ঠানে আভিজাত্য ফুটিয়ে তুলতে বেছে নিন আমাদের এক্সক্লুসিভ সিল্ক কালেকশন। আপনাকে দেখাবে অতুলনীয়।",
+      "img": "assets/jacquard-silk.webp",
+      "btn1Text": "কালেকশন দেখুন",
+      "btn1Link": "#collection",
+      "btn2Text": "রিভিউ দেখুন",
+      "btn2Link": "#reviews"
+    },
+    {
+      "bg": "linear-gradient(135deg, #e3f2fd 0%, #f0f7ff 100%)",
+      "badge": "এক্সক্লুসিভ ডিজাইন",
+      "title": "শাহী",
+      "highlight": "এমব্রয়ডারি কালেকশন",
+      "desc": "নিখুঁত কারুকাজ এবং প্রিমিয়াম ফেব্রিকের সমন্বয়ে নিজেকে উপস্থাপন করুন এক নতুন রূপে। ঐতিহ্যের সাথে আধুনিকতার মেলবন্ধন।",
+      "img": "assets/shahi-embroidery-1.webp",
+      "btn1Text": "অর্ডার করুন",
+      "btn1Link": "#collection",
+      "btn2Text": "সরাসরি কল",
+      "btn2Link": "tel:+8801977755106"
+    }
+  ],
+  "about": {
+    "badge": "আমাদের সম্পর্কে",
+    "title": "ঐতিহ্য এবং আভিজাত্যের",
+    "highlight": "এক অনন্য মিশেল",
+    "desc": "আমরা বিশ্বাস করি যে একটি পোশাকে শুধু সৌন্দর্য নয়, বরং এক একটি গল্প লুকিয়ে থাকে। দীর্ঘ এক দশকেরও বেশি সময় ধরে আমরা বাংলাদেশের ঐতিহ্যবাহী পাঞ্জাবির আভিজাত্যকে আধুনিক রুচির সাথে মিলিয়ে আপনার সামনে উপস্থাপন করছি।",
+    "image": "assets/embroidery-2.webp",
+    "experience": "১০+",
+    "expText": "বছরের অভিজ্ঞতা"
+  },
+  "features": [
+    {
+      "title": "দ্রুত ডেলিভারি",
+      "desc": "সারা বাংলাদেশে ৪৮ ঘণ্টার মধ্যে হোম ডেলিভারি।"
+    },
+    {
+      "title": "প্রিমিয়াম মান",
+      "desc": "সেরা মানের ফেব্রিক এবং নিখুঁত সেলাই।"
+    },
+    {
+      "title": "সহজ রিটার্ন",
+      "desc": "৭ দিনের মধ্যে সাইজ পরিবর্তনের সুযোগ।"
+    },
+    {
+      "title": "২৪/৭ সাপোর্ট",
+      "desc": "যেকোনো জিজ্ঞাসায় আমরা আছি আপনার পাশে।"
+    }
+  ],
+  "filters": [
+    {
+      "label": "সবগুলো",
+      "value": "all"
+    },
+    {
+      "label": "সুতি",
+      "value": "cotton"
+    },
+    {
+      "label": "সিল্ক",
+      "value": "silk"
+    },
+    {
+      "label": "প্রিমিয়াম",
+      "value": "premium"
+    }
+  ],
+  "nav": [
+    {
+      "label": "হোম",
+      "link": "#home"
+    },
+    {
+      "label": "কালেকশন",
+      "link": "#collection"
+    },
+    {
+      "label": "আমাদের সম্পর্কে",
+      "link": "#about"
+    },
+    {
+      "label": "রিভিউ",
+      "link": "#reviews"
+    },
+    {
+      "label": "fu",
+      "link": ""
+    }
+  ],
+  "social": [
+    {
+      "icon": "fab fa-facebook-f",
+      "link": "#"
+    },
+    {
+      "icon": "fab fa-instagram",
+      "link": "#"
+    },
+    {
+      "icon": "fab fa-whatsapp",
+      "link": "+880123456789"
+    },
+    {
+      "icon": "fab fa-youtube",
+      "link": "#"
+    }
+  ],
+  "footer": {
+    "desc": "আমরা বিশ্বাস করি আভিজাত্য এবং আরামের এক অনন্য সমন্বয়। দীর্ঘ এক দশকেরও বেশি সময় ধরে আমরা বাংলাদেশের ঐতিহ্যবাহী পাঞ্জাবির আভিজাত্যকে আপনার সামনে উপস্থাপন করছি।",
+    "copy": "© ২০২৪ প্রিমিয়াম পাঞ্জাবি। সর্বস্বত্ব সংরক্ষিত।",
+    "links": []
+  },
+  "fbPixelId": "2190813385079892",
+  "smtp": {
+    "host": "smtp.gmail.com",
+    "port": 587,
+    "secure": false,
+    "user": "jobsiteincome@gmail.com",
+    "pass": "dgie hkns htub bwup"
+  },
+  "fbAccessToken": "EAAURZCZCMPOlsBQxpHcNgBYjikMR3ZBCqq96NrPzeZA809KvKNAtDrgOTyliez3JeHryjW3eOrHPOlEU7ugv6uCttXS5u4SmnHJwPhKkOODZCYeoyFUQ6rU1ZBMEJ75KYoIgGqa8cNuPPhckfK5QbZAddrrCwDPgVmShoLGfqWRxCi8vkM3srRjAFlPjYyWvAZDZD",
+  "fbTestEventCode": "TEST81660",
+  "fbDomainVerify": ""
+}

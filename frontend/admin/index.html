@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Hidden Panel</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f59e0b;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23d97706;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='256' cy='256' r='240' fill='%230f172a' stroke='url(%23g)' stroke-width='10'/%3E%3Cpath fill='url(%23g)' d='M256 120l-100 80 30 160 70 40 70-40 30-160z'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+<style>
+    /* 99% Privacy & Selection Lock */
+    * { 
+        -webkit-user-select: none !important; 
+        -moz-user-select: none !important; 
+        -ms-user-select: none !important; 
+        user-select: none !important; 
+        -webkit-touch-callout: none !important; 
+    }
+    img { pointer-events: none !important; -webkit-user-drag: none !important; }
+</style>
+<script src="security.js"></script>
+</head>
+
+<body>
+
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <div id="loading"><i class="fas fa-spinner fa-spin"></i> &nbsp; Syncing Data...</div>
+
+    
+    <div id="login-overlay">
+        <div class="login-card">
+            <div class="login-logo">
+                <i class="fas fa-shield-halved"
+                    style="font-size: 3rem; color: var(--primary); animation: pulse 2s infinite;"></i>
+            </div>
+
+            
+            <div id="login-section">
+                <h2 style="margin-bottom: 4px;">Admin Dashboard</h2>
+                <p style="color: var(--text-light); font-size: 0.875rem; margin-bottom: 1.5rem;">Authorized personnel
+                    only</p>
+
+                
+                <button id="google-signin-btn" type="button" style="
+                    width: 100%; height: 48px; border-radius: 10px;
+                    border: 2px solid var(--border); background: #fff;
+                    display: flex; align-items: center; justify-content: center; gap: 10px;
+                    font-size: 0.95rem; font-weight: 600; color: #374151; cursor: pointer;
+                    margin-bottom: 1rem; transition: all 0.2s; font-family: inherit;
+                " onmouseover="this.style.borderColor='#4285f4'; this.style.background='#f0f4ff';"
+                    onmouseout="this.style.borderColor='var(--border)'; this.style.background='#fff';">
+                    <svg width="20" height="20" viewBox="0 0 48 48">
+                        <path fill="#4285F4"
+                            d="M47.5 24.6c0-1.6-.1-3.1-.4-4.6H24v8.7h13.1c-.6 3-2.3 5.5-4.9 7.2v6h7.9c4.6-4.3 7.4-10.6 7.4-17.3z" />
+                        <path fill="#34A853"
+                            d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.9-6c-2.1 1.4-4.8 2.3-8 2.3-6.1 0-11.3-4.1-13.2-9.7H2.5v6.2C6.5 42.9 14.7 48 24 48z" />
+                        <path fill="#FBBC04"
+                            d="M10.8 28.8c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4v-6.2H2.5C.9 17 0 20.4 0 24s.9 7 2.5 10.1l8.3-5.3z" />
+                        <path fill="#E94235"
+                            d="M24 9.5c3.4 0 6.5 1.2 8.9 3.5l6.7-6.7C35.9 2.5 30.6 0 24 0 14.7 0 6.5 5.1 2.5 13.9l8.3 6.5C12.7 13.6 17.9 9.5 24 9.5z" />
+                    </svg>
+                    Continue with Google
+                </button>
+
+                <div style="display: flex; align-items: center; gap: 10px; margin: 1rem 0;">
+                    <div style="flex:1; height: 1px; background: var(--border);"></div>
+                    <span style="font-size: 0.8rem; color: var(--text-light); white-space: nowrap;">or sign in with
+                        email</span>
+                    <div style="flex:1; height: 1px; background: var(--border);"></div>
+                </div>
+
+                <form id="login-form">
+                    <div class="form-group" style="text-align: left;">
+                        <label>Email or Username</label>
+                        <input type="text" id="username" placeholder="admin@gmail.com" required>
+                    </div>
+                    <div class="form-group" style="text-align: left; position: relative;">
+                        <label>Password</label>
+                        <input type="password" id="password" placeholder="••••••••" required
+                            style="padding-right: 42px;">
+                        <span onclick="togglePwd('password', this)"
+                            style="position:absolute; right:12px; bottom:12px; cursor:pointer; color: var(--text-light);">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
+                    <button type="submit" id="login-submit-btn" class="btn btn-primary btn-full"
+                        style="height: 50px; font-size: 1rem;">
+                        <i class="fas fa-lock" style="margin-right:6px;"></i> Sign In to Portal
+                    </button>
+                </form>
+
+                <p style="margin-top: 1.25rem; font-size: 0.875rem; color: var(--text-light);">
+                    Need access? <a href="#" id="show-signup"
+                        style="color: var(--primary); font-weight: 600; text-decoration: none;">Request Access</a>
+                </p>
+            </div>
+
+            
+            <div id="signup-section" style="display: none;">
+                <h2 style="margin-bottom: 4px;">Request Access</h2>
+                <p style="color: var(--text-light); font-size: 0.875rem; margin-bottom: 1.5rem;">Submit request for
+                    admin approval</p>
+
+                
+                <button id="google-signup-btn" type="button" style="
+                    width: 100%; height: 48px; border-radius: 10px;
+                    border: 2px solid var(--border); background: #fff;
+                    display: flex; align-items: center; justify-content: center; gap: 10px;
+                    font-size: 0.95rem; font-weight: 600; color: #374151; cursor: pointer;
+                    margin-bottom: 1rem; transition: all 0.2s; font-family: inherit;
+                " onmouseover="this.style.borderColor='#4285f4'; this.style.background='#f0f4ff';"
+                    onmouseout="this.style.borderColor='var(--border)'; this.style.background='#fff';">
+                    <svg width="20" height="20" viewBox="0 0 48 48">
+                        <path fill="#4285F4"
+                            d="M47.5 24.6c0-1.6-.1-3.1-.4-4.6H24v8.7h13.1c-.6 3-2.3 5.5-4.9 7.2v6h7.9c4.6-4.3 7.4-10.6 7.4-17.3z" />
+                        <path fill="#34A853"
+                            d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.9-6c-2.1 1.4-4.8 2.3-8 2.3-6.1 0-11.3-4.1-13.2-9.7H2.5v6.2C6.5 42.9 14.7 48 24 48z" />
+                        <path fill="#FBBC04"
+                            d="M10.8 28.8c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4v-6.2H2.5C.9 17 0 20.4 0 24s.9 7 2.5 10.1l8.3-5.3z" />
+                        <path fill="#E94235"
+                            d="M24 9.5c3.4 0 6.5 1.2 8.9 3.5l6.7-6.7C35.9 2.5 30.6 0 24 0 14.7 0 6.5 5.1 2.5 13.9l8.3 6.5C12.7 13.6 17.9 9.5 24 9.5z" />
+                    </svg>
+                    Sign up with Google
+                </button>
+
+                <div style="display: flex; align-items: center; gap: 10px; margin: 1rem 0;">
+                    <div style="flex:1; height: 1px; background: var(--border);"></div>
+                    <span style="font-size: 0.8rem; color: var(--text-light); white-space: nowrap;">or fill form</span>
+                    <div style="flex:1; height: 1px; background: var(--border);"></div>
+                </div>
+
+                <form id="signup-form">
+                    <div class="form-group" style="text-align: left;">
+                        <label>Username</label>
+                        <input type="text" id="signup-username" placeholder="johndoe" required>
+                    </div>
+                    <div class="form-group" style="text-align: left;">
+                        <label>Email Address</label>
+                        <input type="email" id="signup-email" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group" style="text-align: left; position: relative;">
+                        <label>Password</label>
+                        <input type="password" id="signup-password" placeholder="••••••••" required
+                            style="padding-right: 42px;">
+                        <span onclick="togglePwd('signup-password', this)"
+                            style="position:absolute; right:12px; bottom:12px; cursor:pointer; color: var(--text-light);">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-full" style="height: 50px; font-size: 1rem;">
+                        <i class="fas fa-paper-plane" style="margin-right:6px;"></i> Submit Request
+                    </button>
+                </form>
+
+                <p style="margin-top: 1.25rem; font-size: 0.875rem; color: var(--text-light);">
+                    Already have access? <a href="#" id="show-login"
+                        style="color: var(--primary); font-weight: 600; text-decoration: none;">Back to Login</a>
+                </p>
+            </div>
+
+            <p id="login-error" style="color: var(--danger); margin-top: 1.25rem; font-weight: 600; display: none;">
+                Access Denied: Invalid Credentials</p>
+            <p id="signup-success" style="color: var(--success); margin-top: 1.25rem; font-weight: 600; display: none;">
+                Request submitted! Wait for approval.</p>
+        </div>
+    </div>
+
+    
+    <aside class="sidebar" style="display: none;">
+        <div class="sidebar-header">
+            <i class="fas fa-gem icon-float" style="color: #6366f1;"></i> Luxury Admin
+        </div>
+        <div class="nav-group">
+            <div class="nav-item active" data-tab="dashboard">
+                <i class="fas fa-chart-pie nav-icon"></i> Dashboard
+            </div>
+            <div class="nav-item" data-tab="orders">
+                <i class="fas fa-cart-shopping nav-icon"></i> Sales & Orders
+            </div>
+            <div class="nav-item" data-tab="products">
+                <i class="fas fa-boxes-stacked nav-icon"></i> Inventory
+            </div>
+            <div class="nav-item" data-tab="content">
+                <i class="fas fa-pen-to-square nav-icon"></i> Page Content
+            </div>
+            <div class="nav-item" data-tab="reviews-tab">
+                <i class="fas fa-comment-dots nav-icon"></i> Feedback
+            </div>
+            <div class="nav-item" data-tab="subscribers">
+                <i class="fas fa-envelope-open-text nav-icon"></i> Newsletter & Marketing
+            </div>
+            <div class="nav-item" data-tab="settings">
+                <i class="fas fa-gears nav-icon"></i> App Settings
+            </div>
+            <div class="nav-item" data-tab="users">
+                <i class="fas fa-user-shield nav-icon"></i> Access Control
+            </div>
+        </div>
+        <div class="sidebar-footer" style="padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05);">
+            <div class="nav-item" id="logout-btn" style="color: #fda4af;">
+                <i class="fas fa-power-off nav-icon"></i> Sign Out
+            </div>
+        </div>
+    </aside>
+
+    
+    <main class="main-content" style="display: none;">
+        <button class="mobile-toggle" id="mobile-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        
+        <div id="dashboard" class="tab-content active">
+            <div class="page-header">
+                <div class="page-header-text">
+                    <h1>Dashboard Overview</h1>
+                    <p>Real-time performance metrics</p>
+                </div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-bag-shopping fa-bounce" style="font-size: 1.5rem;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Orders</h3>
+                        <p id="stat-total-orders">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-sack-dollar fa-beat" style="font-size: 1.5rem;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Revenue</h3>
+                        <p id="stat-total-sales">৳ 0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-warehouse fa-fade" style="font-size: 1.5rem;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Inventory</h3>
+                        <p id="stat-total-products">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i class="fas fa-spinner fa-spin" style="font-size: 1.5rem;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Pending Sales</h3>
+                        <p id="stat-pending-orders">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #fdf2f8; color: #db2777;">
+                        <i class="fas fa-paper-plane fa-bounce" style="font-size: 1.5rem;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Subscribers</h3>
+                        <p id="stat-total-subscribers">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-header">
+                    <h2>Recent Activity</h2>
+                    <button class="btn btn-sm btn-primary" onclick="window.location.reload()"><i
+                            class="fas fa-rotate"></i> Refresh</button>
+                </div>
+                <div class="table-responsive">
+                    <table id="recent-orders-table">
+                        <thead>
+                            <tr>
+                                <th>Ref ID</th>
+                                <th>Customer</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Timestamp</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="orders" class="tab-content">
+            <div class="page-header">
+                <div class="page-header-text">
+                    <h1>Order Fulfillment</h1>
+                    <p>Manage and process customer orders</p>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="table-responsive">
+                    <table id="full-orders-table">
+                        <thead>
+                            <tr>
+                                <th>Ref ID</th>
+                                <th>Customer</th>
+                                <th>Contact</th>
+                                <th>Product</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="products" class="tab-content">
+            <div class="page-header">
+                <div class="page-header-text">
+                    <h1>Inventory Management</h1>
+                    <p>Add and update your product collection</p>
+                </div>
+                <button class="btn btn-primary" id="add-product-btn"><i class="fas fa-plus"></i> New Product</button>
+            </div>
+            <div class="content-card">
+                <div class="table-responsive">
+                    <table id="products-table">
+                        <thead>
+                            <tr>
+                                <th>Gallery</th>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Base Price</th>
+                                <th>Condition</th>
+                                <th>Manage</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="content" class="tab-content">
+            <div class="page-header">
+                <div class="page-header-text">
+                    <h1>Site Content Visual Editor</h1>
+                    <p>Modify text, categories, and menus across the site</p>
+                </div>
+                <button class="btn btn-success" id="save-content-btn"><i class="fas fa-cloud-upload-alt"></i> Publish
+                    Changes</button>
+            </div>
+
+            <div class="edit-grid">
+                
+                <div class="edit-section">
+                    <div class="section-title">
+                        <i class="fas fa-bullhorn fa-shake" style="color: var(--primary); font-size: 1.4rem;"></i>
+                        Global Announcement
+                    </div>
+                    <div class="form-group">
+                        <label>Promo Text / Headline</label>
+                        <textarea id="edit-announcement" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Official Helpline</label>
+                        <input type="text" id="edit-phone">
+                    </div>
+                </div>
+
+                
+                <div class="edit-section">
+                    <div class="section-title">
+                        <i class="fas fa-images fa-fade" style="color: var(--primary); font-size: 1.4rem;"></i> Primary
+                        Hero Banner
+                    </div>
+                    <div class="form-group">
+                        <label>Collection Badge</label>
+                        <input type="text" id="hero-0-badge">
+                    </div>
+                    <div class="form-group">
+                        <label>Main Title</label>
+                        <input type="text" id="hero-0-title">
+                    </div>
+                    <div class="form-group">
+                        <label>Highlight Text</label>
+                        <input type="text" id="hero-0-highlight">
+                    </div>
+                    <div class="form-group">
+                        <label>Full Description</label>
+                        <textarea id="hero-0-desc" rows="3"></textarea>
+                    </div>
+                </div>
+
+                
+                <div class="edit-section">
+                    <div class="section-title">
+                        <i class="fas fa-address-card fa-beat" style="color: var(--primary); font-size: 1.4rem;"></i>
+                        Brand Story
+                    </div>
+                    <div class="form-group">
+                        <label>Heading</label>
+                        <input type="text" id="about-title">
+                    </div>
+                    <div class="form-group">
+                        <label>Sub-heading Highlight</label>
+                        <input type="text" id="about-highlight">
+                    </div>
+                    <div class="form-group">
+                        <label>Detailed Content</label>
+                        <textarea id="about-desc" rows="5"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Years of Legacy</label>
+                        <input type="text" id="about-exp">
+                    </div>
+                </div>
+
+                
+                <div class="edit-section">
+                    <div class="section-title">
+                        <i class="fas fa-star fa-beat" style="color: var(--primary); font-size: 1.4rem;"></i> Service
+                        Values (Features)
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label>Feature 1</label>
+                            <input type="text" id="feat-0-title">
+                            <input type="text" id="feat-0-desc" placeholder="Brief info" style="margin-top: 10px;">
+                        </div>
+                        <div class="form-group">
+                            <label>Feature 2</label>
+                            <input type="text" id="feat-1-title">
+                            <input type="text" id="feat-1-desc" placeholder="Brief info" style="margin-top: 10px;">
+                        </div>
+                        <div class="form-group">
+                            <label>Feature 3</label>
+                            <input type="text" id="feat-2-title">
+                            <input type="text" id="feat-2-desc" placeholder="Brief info" style="margin-top: 10px;">
+                        </div>
+                        <div class="form-group">
+                            <label>Feature 4</label>
+                            <input type="text" id="feat-3-title">
+                            <input type="text" id="feat-3-desc" placeholder="Brief info" style="margin-top: 10px;">
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="edit-section">
+                    <div class="section-title">
+                        <i class="fas fa-link fa-flip" style="color: var(--primary); font-size: 1.4rem;"></i> Primary
+                        Navigation
+                        <button class="btn-icon-sm" style="margin-left: auto;" onclick="addNavItem()">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div id="nav-items-container"></div>
+                </div>
+
+                
+                <div class="edit-section">
+                    <div class="section-title">
+                        <i class="fas fa-hashtag fa-spin" style="color: var(--primary); font-size: 1.4rem;"></i> Social
+                        Presence
+                        <button class="btn-icon-sm" style="margin-left: auto;" onclick="addSocialItem()">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div id="social-items-container"></div>
+                </div>
+
+                
+                <div class="edit-section">
+                    <div class="section-title">
+                        <i class="fas fa-filter fa-bounce" style="color: var(--primary); font-size: 1.4rem;"></i> Browse
+                        Filters
+                        <button class="btn-icon-sm" style="margin-left: auto;" onclick="addFilterItem()">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div id="filter-items-container"></div>
+                </div>
+
+                
+                <div class="edit-section">
+                    <div class="section-title">
+                        <i class="fas fa-shoe-prints fa-fade" style="color: var(--primary); font-size: 1.4rem;"></i>
+                        Global Footer
+                    </div>
+                    <div class="form-group">
+                        <label>Footer Intro Text</label>
+                        <textarea id="foot-desc" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Legal Copyright</label>
+                        <input type="text" id="foot-copy">
+                    </div>
+
+                    <div class="section-title" style="margin-top: 1rem; border: none;">
+                        <i class="fas fa-link"></i> Footer Utility Links
+                        <button class="btn-icon-sm" style="margin-left: auto;" onclick="addFooterLink()">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div id="footer-links-container"></div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="reviews-tab" class="tab-content">
+            <div class="page-header">
+                <div class="page-header-text">
+                    <h1>Customer Testimonials</h1>
+                    <p>Manage reviews shown on the landing page</p>
+                </div>
+                <button class="btn btn-primary" id="add-review-btn"><i class="fas fa-plus"></i> New Feedback</button>
+            </div>
+            <div class="content-card">
+                <div class="table-responsive">
+                    <table id="reviews-table">
+                        <thead>
+                            <tr>
+                                <th>Audience</th>
+                                <th>Content</th>
+                                <th>Rating</th>
+                                <th>Item Ref</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="subscribers" class="tab-content">
+            <div class="page-header">
+                <div class="page-header-text">
+                    <h1>Audience & Marketing</h1>
+                    <p>Manage subscribers and send newsletter campaigns</p>
+                </div>
+            </div>
+
+            <div class="edit-grid" style="align-items: flex-start;">
+                
+                <div class="content-card">
+                    <div class="section-title">
+                        <i class="fas fa-paper-plane" style="color: var(--primary);"></i> Create Campaign
+                    </div>
+                    <form id="campaign-form">
+                        <div class="form-group">
+                            <label>Email Subject</label>
+                            <input type="text" id="camp-subject" placeholder="e.g. New Eid Collection is Here!"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label>Newsletter Title (Heading)</label>
+                            <input type="text" id="camp-title" placeholder="e.g. Celebrate in Style">
+                        </div>
+                        <div class="form-group">
+                            <label>Banner Image URL</label>
+                            <input type="text" id="camp-banner" placeholder="https://example.com/image.jpg">
+                        </div>
+                        <div class="form-group">
+                            <label>Message Content</label>
+                            <textarea id="camp-body" rows="6" placeholder="Write your newsletter message here..."
+                                required></textarea>
+                        </div>
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                            <div class="form-group">
+                                <label>CTA Button Text</label>
+                                <input type="text" id="camp-cta-text" placeholder="Shop Now">
+                            </div>
+                            <div class="form-group">
+                                <label>CTA Button Link</label>
+                                <input type="text" id="camp-cta-link" placeholder="https://example.com/image.jpg">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full" id="send-newsletter-btn">
+                            <i class="fas fa-envelopes-bulk"></i> Send to All Subscribers
+                        </button>
+                    </form>
+                </div>
+
+                
+                <div class="content-card">
+                    <div class="section-title">
+                        <i class="fas fa-users" style="color: var(--primary);"></i> Active Subscribers
+                    </div>
+                    <div class="table-responsive">
+                        <table id="subscribers-table">
+                            <thead>
+                                <tr>
+                                    <th>Email</th>
+                                    <th>Joined</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="settings" class="tab-content">
+            <div class="page-header">
+                <div class="page-header-text">
+                    <h1>Configuration</h1>
+                    <p>Technical and identity settings</p>
+                </div>
+            </div>
+            <div class="edit-section" style="max-width: 680px;">
+                <div class="section-title">
+                    <i class="fas fa-fingerprint fa-beat" style="color: var(--primary); font-size: 1.4rem;"></i>
+                    Identity & Pixel
+                </div>
+                <div class="form-group">
+                    <label>Brand Name / Site Title</label>
+                    <input type="text" id="sett-logo-text">
+                </div>
+                <div class="form-group">
+                    <label>Logo Highlight Color (Accent)</label>
+                    <input type="text" id="sett-logo-accent">
+                </div>
+                <div class="form-group">
+                    <label>Facebook Tracking Pixel ID</label>
+                    <input type="text" id="sett-fb-pixel" placeholder="e.g. 1234567890">
+                </div>
+                <div class="form-group">
+                    <label>Facebook CAPI Access Token</label>
+                    <input type="text" id="sett-fb-token" placeholder="EAAB...">
+                </div>
+                <div class="form-group">
+                    <label>Facebook Test Event Code (Optional)</label>
+                    <input type="text" id="sett-fb-test-code" placeholder="TEST12345">
+                </div>
+                <div class="form-group">
+                    <label>Facebook Domain Verification Code</label>
+                    <input type="text" id="sett-fb-domain-verify" placeholder="abc123xyz456">
+                </div>
+                <div class="form-group">
+                    <label>Access Security (New Admin Password)</label>
+                    <input type="password" id="sett-admin-pass" placeholder="Leave blank to keep current">
+                </div>
+                <button class="btn btn-primary btn-full" id="save-settings-btn"
+                    style="height: 56px; margin-bottom: 2rem;">Update App Config</button>
+
+                <div class="section-title">
+                    <i class="fas fa-envelope-circle-check" style="color: var(--primary); font-size: 1.4rem;"></i>
+                    Email Marketing Setup (SMTP)
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 1rem;">Configure your email
+                    provider (e.g. Gmail App Password) to send real newsletters.</p>
+
+                <div class="form-group">
+                    <label>Email Service Provider</label>
+                    <select id="sett-smtp-service" onchange="applySmtpPreset(this.value)">
+                        <option value="custom">Custom SMTP</option>
+                        <option value="gmail">Gmail</option>
+                        <option value="outlook">Outlook / Office 365</option>
+                        <option value="yahoo">Yahoo Mail</option>
+                        <option value="zoho">Zoho Mail</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>SMTP Host</label>
+                    <input type="text" id="sett-smtp-host" placeholder="e.g. smtp.gmail.com">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label>SMTP Port</label>
+                        <input type="number" id="sett-smtp-port" placeholder="e.g. 465 or 587">
+                    </div>
+                    <div class="form-group">
+                        <label>SMTP Encryption</label>
+                        <select id="sett-smtp-secure">
+                            <option value="true">SSL (Port 465)</option>
+                            <option value="false">TLS (Port 587)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Sender Email (User)</label>
+                    <input type="email" id="sett-smtp-user" placeholder="your-email@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label>SMTP Password / App Password</label>
+                    <input type="password" id="sett-smtp-pass" placeholder="••••••••">
+                </div>
+
+                <button class="btn btn-outline btn-full" id="save-smtp-btn"
+                    style="height: 56px; margin-bottom: 10px;">Save Email Configuration</button>
+                <button class="btn btn-outline btn-full" id="test-smtp-btn"
+                    style="height: 48px; border-style: dashed; color: var(--primary); margin-bottom: 3rem;">
+                    <i class="fas fa-vial"></i> Test SMTP Connection
+                </button>
+
+                
+                <div class="section-title">
+                    <i class="fas fa-fire fa-beat" style="color: #f5820d; font-size: 1.4rem;"></i>
+                    Firebase Database Setup
+                </div>
+                <div
+                    style="background: #fff8f1; padding: 1.5rem; border-radius: 12px; border: 1px solid #ffedd5; margin-bottom: 2rem;">
+                    <h4 style="color: #9a3412; font-size: 0.95rem; margin-bottom: 0.5rem;"><i
+                            class="fas fa-info-circle"></i> গুরুত্বপূর্ণ নির্দেশনাবলী:</h4>
+                    <ul style="font-size: 0.85rem; color: #c2410c; padding-left: 1.25rem; line-height: 1.6;">
+                        <li>আপনার Firebase কনসোলে গিয়ে <b>Authentication</b> এনাবল করুন (Email/Password & Google)।</li>
+                        <li><b>Realtime Database</b> তৈরি করুন এবং Read/Write Rules 'true' অথবা পাসওয়ার্ড প্রোটেক্টেড
+                            করুন।</li>
+                        <li>নিচের ফিল্ডগুলোতে আপনার Firebase Web App থেকে পাওয়া কনফিগারেশন ডাটা পেস্ট করুন।</li>
+                    </ul>
+                </div>
+
+                <div class="form-group"
+                    style="background: white; border: 1px dashed var(--primary-light); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem;">
+                    <label style="color: var(--primary);"><i class="fas fa-bolt"></i> Quick Config Paste</label>
+                    <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 10px;">Paste your
+                        <code>const firebaseConfig = { ... };</code> here for auto-fill.
+                    </p>
+                    <textarea id="sett-fb-quick-paste" rows="4" placeholder="Paste the JS object or JSON here..."
+                        style="background: #f1f5f9; border: 1px solid #cbd5e1; font-family: monospace; font-size: 0.8rem;"></textarea>
+                    <button class="btn btn-sm btn-primary" onclick="autoFillFirebaseConfig()"
+                        style="margin-top: 10px; width: 100%;">
+                        <i class="fas fa-magic"></i> Auto-Fill Fields
+                    </button>
+                </div>
+
+                <div class="form-group">
+                    <label>Firebase API Key</label>
+                    <input type="text" id="sett-fb-api-key" placeholder="AIza...">
+                </div>
+                <div class="form-group">
+                    <label>Auth Domain</label>
+                    <input type="text" id="sett-fb-auth-domain" placeholder="project-id.firebaseapp.com">
+                </div>
+                <div class="form-group">
+                    <label>Database URL (Realtime DB)</label>
+                    <input type="text" id="sett-fb-db-url"
+                        placeholder="https://admin-bc484-default-rtdb.firebaseio.com/">
+                </div>
+                <div class="form-group">
+                    <label>Project ID</label>
+                    <input type="text" id="sett-fb-project-id" placeholder="project-id">
+                </div>
+                <div class="form-group">
+                    <label>Storage Bucket</label>
+                    <input type="text" id="sett-fb-storage-bucket" placeholder="project-id.firebasestorage.app">
+                </div>
+                <div class="form-group">
+                    <label>Messaging Sender ID</label>
+                    <input type="text" id="sett-fb-sender-id" placeholder="1059566799453">
+                </div>
+                <div class="form-group">
+                    <label>App ID</label>
+                    <input type="text" id="sett-fb-app-id" placeholder="1:1059566799453:web:...">
+                </div>
+                <div class="form-group">
+                    <label>Measurement ID</label>
+                    <input type="text" id="sett-fb-measure-id" placeholder="G-LC49VN9FN9">
+                </div>
+
+                <div class="section-title" style="margin-top: 2rem; border: none;">
+                    <i class="fas fa-key"></i> Firebase Service Account (JSON)
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 1rem;">সার্ভার সাইড ডাটাবেজ
+                    এক্সেসের জন্য সার্ভিস একাউন্ট কি (JSON) এখানে পেস্ট করুন। এটি ছাড়া Dashboard-এর অনেক ফিচার কাজ করবে
+                    না।</p>
+                <div class="form-group">
+                    <label>Service Account JSON Content</label>
+                    <textarea id="sett-fb-service-key" rows="8"
+                        placeholder='{ "type": "service_account", ... }'></textarea>
+                </div>
+
+                <button class="btn btn-primary btn-full" id="save-firebase-btn"
+                    style="height: 56px; background: linear-gradient(135deg, #f5820d 0%, #fbbf24 100%); box-shadow: 0 10px 20px -10px rgba(245, 130, 13, 0.5);">
+                    <i class="fas fa-cloud-arrow-up"></i> Update Firebase Configuration
+                </button>
+            </div>
+        </div>
+
+        
+        <div id="users" class="tab-content">
+            <div class="page-header">
+                <div class="page-header-text">
+                    <h1>User Access Control</h1>
+                    <p>Add email and password to grant system access</p>
+                </div>
+                <button class="btn btn-primary" id="add-user-btn"><i class="fas fa-user-plus"></i> Add New
+                    Access</button>
+            </div>
+            <div class="content-card">
+                <div class="table-responsive">
+                    <table id="users-table">
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Email Identity</th>
+                                <th>Access Level</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Inventory Item Detail</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <form id="product-form">
+                <input type="hidden" id="prod-id">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div>
+                        <div class="form-group"><label>Product Title</label><input type="text" id="prod-name" required>
+                        </div>
+                        <div class="form-group"><label>Primary Category</label><select id="prod-category"></select>
+                        </div>
+                        <div class="form-group"><label>Badge / Tag</label><input type="text" id="prod-tag"></div>
+                        <div class="form-group"><label>Image Links (One per line)</label>
+                            <textarea id="prod-image-links" rows="3"
+                                placeholder="https://example.com/image.jpg"></textarea>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group"><label>Sale Price (৳)</label><input type="number" id="prod-price"
+                                required></div>
+                        <div class="form-group"><label>MSRP / Old Price (৳)</label><input type="number"
+                                id="prod-old-price"></div>
+                        <div class="form-group"><label>Media Upload (Images)</label><input type="file" id="prod-images"
+                                multiple accept="image/*"></div>
+                        <div class="form-group"><label>Video Links (One per line)</label>
+                            <textarea id="prod-video-links" rows="2" placeholder="https://example.com/image.jpg"></textarea>
+                        </div>
+                        <div class="form-group"><label>Or Video Upload</label><input type="file" id="prod-video-file"
+                                multiple accept="video/*"></div>
+                    </div>
+                </div>
+                <div class="form-group"><label>Brief Description</label><textarea id="prod-desc" rows="3"></textarea>
+                </div>
+                <div class="form-group"><label>Key Features (One per line)</label><textarea id="prod-features"
+                        rows="4"></textarea></div>
+                <button type="submit" class="btn btn-success btn-full">Commit to Database</button>
+            </form>
+        </div>
+    </div>
+
+    
+    <div id="order-modal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2>Transaction Details</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div id="order-details-content"></div>
+            <div class="form-group" style="margin-top: 2rem;">
+                <label>Fulfillment Status</label>
+                <select id="update-order-status">
+                    <option value="Pending">Pending</option>
+                    <option value="Processing">Processing</option>
+                    <option value="Shipped">Shipped</option>
+                    <option value="Delivered">Delivered</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+            </div>
+            <div style="display: flex; gap: 1rem;">
+                <button class="btn btn-success btn-full" id="save-order-status">Update Fulfillment</button>
+                <button class="btn btn-danger" id="delete-order-btn"><i class="fas fa-trash"></i></button>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="user-modal" class="modal">
+        <div class="modal-content" style="max-width: 440px;">
+            <div class="modal-header">
+                <h2>Portal Access (অ্যাক্সেস দিন)</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <form id="user-form">
+                <div class="form-group">
+                    <label>Username / ID (নামের অংশ)</label>
+                    <input type="text" id="user-username" placeholder="e.g. shohel_admin" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address (ইমেইল এড্রেস)</label>
+                    <input type="email" id="user-email" placeholder="user@gmail.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Assigned Password (পাসওয়ার্ড দিন)</label>
+                    <input type="password" id="user-password" placeholder="••••••••" required>
+                </div>
+                <div class="form-group">
+                    <label>Access Role (রোল সিলেক্ট করুন)</label>
+                    <select id="user-role">
+                        <option value="full_admin">Full Access (সবকিছু কন্ট্রোল)</option>
+                        <option value="maintenance">Maintenance Only (শুধু দেখা ও আপডেট)</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Give Portal Access (অ্যাক্সেস নিশ্চিত
+                    করুন)</button>
+            </form>
+        </div>
+    </div>
+
+    
+    <div id="review-modal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2>Customer Feedback</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <form id="review-form">
+                <input type="hidden" id="rev-id">
+                <div class="form-group"><label>Author Name</label><input type="text" id="rev-name" required></div>
+                <div class="form-group"><label>Verified Review Text</label><textarea id="rev-text" rows="3"
+                        required></textarea></div>
+                <div class="form-group"><label>Rating (1-5 Stars)</label><input type="number" id="rev-stars" min="1"
+                        max="5" value="5"></div>
+                <div class="form-group"><label>Purchased Item Ref</label><input type="text" id="rev-bought"
+                        placeholder="e.g. Cotton Panjabi"></div>
+                <div class="form-group"><label>Author Image URL</label><input type="text" id="rev-image-url"
+                        placeholder="https://example.com/image.jpg"></div>
+                <div class="form-group"><label>OR Upload Photo</label><input type="file" id="rev-image-file"
+                        accept="image/*"></div>
+                <button type="submit" class="btn btn-primary btn-full">Post Testimonial</button>
+            </form>
+        </div>
+    </div>
+
+    
+    <div id="custom-popup">
+        <div class="popup-card">
+            <div class="popup-icon" id="popup-icon"></div>
+            <div class="popup-title" id="popup-title"></div>
+            <div class="popup-message" id="popup-message"></div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    
+    <!-- Config & Main Script -->
+    <script src="../firebase-config.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>

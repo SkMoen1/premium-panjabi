@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অর্ডার কনফার্ম করুন | Premium Panjabi</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f59e0b;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23d97706;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='256' cy='256' r='240' fill='%230f172a' stroke='url(%23g)' stroke-width='10'/%3E%3Cpath fill='url(%23g)' d='M256 120l-100 80 30 160 70 40 70-40 30-160z'/%3E%3C/svg%3E"><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%23f59e0b;stop-opacity:1'/><stop offset='50%25' style='stop-color:%23fbbf24;stop-opacity:1'/><stop offset='100%25' style='stop-color:%23d97706;stop-opacity:1'/></linearGradient></defs><circle cx='256' cy='256' r='240' fill='%230f172a' stroke='url(%23g)' stroke-width='10'/><path fill='url(%23g)' d='M256 120l-100 80 30 160 70 40 70-40 30-160z'/><path fill='rgba(255,255,255,0.3)' d='M256 120l-100 80 100 40z'/></svg>">
+    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary: #5c0000;
+            --primary-light: #a80000;
+            --accent: #d4af37;
+            --accent-dark: #b8860b;
+            --white: #ffffff;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            font-family: 'Hind Siliguri', 'Outfit', sans-serif;
+            line-height: 1.6;
+        }
+
+        .checkout-page-content {
+            padding: 20px 0 60px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            color: var(--primary);
+            transform: translateX(-5px);
+        }
+
+        
+        .product-brief {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 40px;
+            display: grid;
+            grid-template-columns: 450px 1fr;
+            gap: 50px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .product-gallery {
+            width: 100%;
+        }
+
+        .main-image-container {
+            width: 100%;
+            height: 450px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #fff;
+            position: relative;
+            cursor: zoom-in;
+            border: 1px solid #f1f5f9;
+        }
+
+        .main-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.1s ease-out;
+        }
+
+        .zoom-active img {
+            transform: scale(3);
+        }
+
+        .thumbnail-carousel {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .thumb {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .thumb.active {
+            border-color: var(--accent);
+            transform: scale(0.95);
+        }
+
+        .product-brief-info h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .product-brief-info .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .product-brief-info .price::before {
+            content: '৳';
+            font-weight: 400;
+        }
+
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .benefits-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .benefits-list li i {
+            color: var(--accent);
+        }
+
+        .tagline {
+            font-weight: 700;
+            color: var(--primary);
+            border-left: 4px solid var(--accent);
+            padding-left: 15px;
+            margin-top: 20px;
+        }
+
+        
+        .cart-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title h3::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .cart-table-container {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .shop_table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .shop_table th {
+            padding: 18px 25px;
+            background: #f8fafc;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .shop_table td {
+            padding: 20px 25px;
+            vertical-align: middle;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .product-thumbnail img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .quantity-controller {
+            display: flex;
+            align-items: center;
+            background: #f1f5f9;
+            border-radius: 50px;
+            padding: 4px;
+            width: fit-content;
+        }
+
+        .qty-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: none;
+            background: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .qty-btn:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .quantity-controller input {
+            width: 40px;
+            text-align: center;
+            border: none;
+            background: transparent;
+            font-weight: 700;
+            outline: none;
+        }
+
+        
+        .checkout-container {
+            background: var(--white);
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            padding: 50px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .checkout-header h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .checkout-badge {
+            display: inline-block;
+            background: rgba(92, 0, 0, 0.1);
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 40px;
+        }
+
+        .form-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #f1f5f9;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            background: #f8fafc;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(92, 0, 0, 0.1);
+            outline: none;
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .input-with-icon input {
+            padding-left: 45px;
+        }
+
+        
+        .size-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .size-btn {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .size-btn input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .size-btn span {
+            display: block;
+            padding: 10px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-weight: 700;
+            transition: var(--transition);
+            background: #f8fafc;
+        }
+
+        .size-btn input:checked+span {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+            box-shadow: 0 4px 10px rgba(92, 0, 0, 0.2);
+        }
+
+        
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .payment-card {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: #f8fafc;
+        }
+
+        .payment-card i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .payment-card img {
+            height: 25px;
+            margin-bottom: 5px;
+            object-fit: contain;
+        }
+
+        .payment-card span {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .payment-card input {
+            display: none;
+        }
+
+        .payment-card.active {
+            border-color: var(--primary);
+            background: #fff;
+            box-shadow: var(--shadow-md);
+        }
+
+        .payment-instruction {
+            background: #fff;
+            border: 1px dashed var(--primary);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .payment-instruction.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .account-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f1f5f9;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .account-number {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .copy-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        
+        .order-summary-card {
+            background: #fff;
+            border-radius: 24px;
+            border: 2px solid var(--primary);
+            padding: 30px;
+            position: sticky;
+            top: 40px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .summary-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px dashed #e2e8f0;
+            font-weight: 600;
+        }
+
+        .summary-item.total {
+            border-bottom: none;
+            border-top: 2px solid var(--primary);
+            margin-top: 10px;
+            padding-top: 20px;
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .delivery-radios {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .delivery-radios label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .radio-custom {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #cbd5e1;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .delivery-radios input:checked+.radio-custom {
+            border-color: var(--primary);
+        }
+
+        .delivery-radios input:checked+.radio-custom::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .delivery-radios input {
+            display: none;
+        }
+
+        .btn-confirm-order {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: #fff;
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px rgba(92, 0, 0, 0.2);
+        }
+
+        .btn-confirm-order:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(92, 0, 0, 0.3);
+        }
+
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.8s ease-out;
+        }
+
+        .reveal-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        
+        @media (max-width: 1024px) {
+            .product-brief {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 25px;
+            }
+
+            .main-image-container {
+                height: 400px;
+            }
+
+            .checkout-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .order-summary-card {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .checkout-container {
+                padding: 25px 15px;
+            }
+
+            .product-brief-info h2 {
+                font-size: 1.8rem;
+            }
+
+            .benefits-list {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-table-container {
+                overflow-x: visible;
+                background: transparent;
+                box-shadow: none;
+                border: none;
+            }
+
+            .shop_table {
+                min-width: 100%;
+            }
+
+            .shop_table thead {
+                display: none;
+            }
+
+            .shop_table tr {
+                display: block;
+                margin-bottom: 20px;
+                background: var(--white);
+                border-radius: 15px;
+                box-shadow: var(--shadow-sm);
+                padding: 10px;
+                border: 1px solid #e2e8f0;
+            }
+
+            .shop_table td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 15px;
+                border-bottom: 1px solid #f1f5f9;
+                text-align: right;
+            }
+
+            .shop_table td:last-child {
+                border-bottom: none;
+            }
+
+            .shop_table td::before {
+                content: attr(data-title);
+                font-weight: 700;
+                color: var(--text-dark);
+                font-size: 0.85rem;
+                text-align: left;
+            }
+
+            .quantity-controller {
+                margin-left: auto;
+            }
+
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+
+            .checkout-header h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-image-container {
+                height: 300px;
+            }
+
+            .product-brief-info h2 {
+                font-size: 1.5rem;
+            }
+
+            .form-card {
+                padding: 20px 15px;
+            }
+
+            .btn-confirm-order {
+                font-size: 1rem;
+                padding: 15px;
+            }
+        }
+    </style>
+
+<style>
+    /* 99% Privacy & Selection Lock */
+    * { 
+        -webkit-user-select: none !important; 
+        -moz-user-select: none !important; 
+        -ms-user-select: none !important; 
+        user-select: none !important; 
+        -webkit-touch-callout: none !important; 
+    }
+    img { pointer-events: none !important; -webkit-user-drag: none !important; }
+</style>
+<script src="security.js"></script>
+</head>
+
+<body>
+    <header class="navbar" style="position: static; background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+        <div class="container nav-content">
+            <div class="logo">
+                <span class="logo-accent">Premium</span> Panjabi
+            </div>
+            <div class="nav-cta">
+                <a href="index.html" class="btn btn-outline"
+                    style="color: var(--primary); border-color: var(--primary);">হোম পেজ</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="checkout-page-content reveal">
+        <div class="container">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> কেনাকাটা চালিয়ে যান</a>
+
+            <div class="product-brief reveal">
+                <div class="product-gallery">
+                    <div class="main-image-container" id="zoom-container">
+                        <img id="main-display-img" src="" alt="Product">
+                    </div>
+                    <div class="thumbnail-carousel" id="thumb-carousel">
+                        
+                    </div>
+                </div>
+
+                <div class="product-brief-info">
+                    <h2 id="selected-product-title">লোডিং...</h2>
+                    <div class="price" id="selected-product-price">০.০০</div>
+
+                    <div class="why-choose-us">
+                        <h3>কেন আমাদের থেকে নিবেন?</h3>
+                        <div class="decorative-line"></div>
+                        <ul class="benefits-list">
+                            <li><i class="fas fa-arrow-circle-right"></i> ১০০% পিওর খাদি কটন</li>
+                            <li><i class="fas fa-arrow-circle-right"></i> খুবই সফট ও আরামদায়ক হবে</li>
+                            <li><i class="fas fa-arrow-circle-right"></i> লুজ ফিটিং এবং স্ট্যান্ডার্ড সাইজ</li>
+                            <li><i class="fas fa-arrow-circle-right"></i> উন্নত মানের ডাবল/চাপ সেলাই দেওয়া হয়েছে</li>
+                            <li><i class="fas fa-arrow-circle-right"></i> নিজস্ব কারখানায় দক্ষ কারিগর দ্বারা সেলাই করা
+                                হয়</li>
+                            <li><i class="fas fa-arrow-circle-right"></i> অনুষ্ঠান কিংবা প্রতিদিনের ব্যবহারে উপযুক্ত
+                            </li>
+                            <li><i class="fas fa-arrow-circle-right"></i> শতভাগ কালার গ্যারান্টি</li>
+                            <li><i class="fas fa-arrow-circle-right"></i> চায়না স্ল্যাপ মেটাল বাটন খুবই মজবুত</li>
+                            <li><i class="fas fa-arrow-circle-right"></i> পাঞ্জাবিগুলো অরিজিনাল কুমিল্লার খাদি কাপড় দিয়ে
+                                তৈরি</li>
+                        </ul>
+                        <p class="tagline">খাদি পরুন, বাংলার ঐতিহ্যকে বরণ করুন।</p>
+                    </div>
+                </div>
+            </div>
+
+            <section class="cart-section reveal">
+                <div class="section-title">
+                    <h3>আপনার কার্ট</h3>
+                </div>
+                <div class="cart-table-container">
+                    <table class="shop_table">
+                        <thead>
+                            <tr>
+                                <th class="product-name">পণ্য</th>
+                                <th class="product-price">মূল্য</th>
+                                <th class="product-quantity">পরিমাণ</th>
+                                <th class="product-subtotal">সাবটোটাল</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="woocommerce-cart-form__cart-item cart_item">
+
+                                <td class="product-name" id="cart-item-title" data-title="পণ্য">
+                                    লোডিং...
+                                </td>
+                                <td class="product-price" data-title="মূল্য">
+                                    <span class="amount">৳ <span id="cart-item-price">০</span></span>
+                                </td>
+                                <td class="product-quantity" data-title="পরিমাণ">
+                                    <div class="quantity-controller">
+                                        <button type="button" class="qty-btn" id="minus-qty"><i
+                                                class="fas fa-minus"></i></button>
+                                        <input type="number" id="cart-qty-input" value="1" min="1" readonly>
+                                        <button type="button" class="qty-btn" id="plus-qty"><i
+                                                class="fas fa-plus"></i></button>
+                                    </div>
+                                </td>
+                                <td class="product-subtotal" data-title="সাবটোটাল">
+                                    <span class="amount">৳ <span id="cart-item-subtotal">০</span></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="checkout" class="checkout-section reveal">
+                <div class="checkout-container">
+                    <div class="checkout-header">
+                        <div class="checkout-badge reveal">অর্ডার করুন</div>
+                        <h2>অর্ডার কনফার্ম করতে তথ্য দিন</h2>
+                        <p>আপনার সঠিক তথ্য দিয়ে ফরমটি পূরণ করুন, আমরা আপনার সাথে যোগাযোগ করব।</p>
+                    </div>
+
+                    <form id="order-form" class="checkout-grid">
+                        <div class="checkout-form-left">
+                            <div class="form-card reveal">
+                                <h3><i class="fas fa-user-circle"></i> কাস্টমার ইনফরমেশন</h3>
+                                <div class="form-group">
+                                    <label>আপনার নাম *</label>
+                                    <input type="text" id="customer-name" placeholder="আপনার পুরো নাম লিখুন" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>মোবাইল নম্বর *</label>
+                                    <div class="input-with-icon">
+                                        <i class="fas fa-phone"></i>
+                                        <input type="tel" id="customer-phone" placeholder="০১৭XXXXXXXX" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>আপনার ঠিকানা (গ্রাম/থানা, জেলা) *</label>
+                                    <textarea id="customer-address" rows="3" placeholder="আপনার বিস্তারিত ঠিকানা লিখুন"
+                                        required></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="checkout-form-right">
+                            <div class="form-card reveal">
+                                <h3><i class="fas fa-cog"></i> পছন্দ নির্বাচন করুন</h3>
+                                <div class="form-group">
+                                    <label>সাইজ নির্বাচন করুন *</label>
+                                    <div class="size-options">
+                                        <label class="size-btn">
+                                            <input type="radio" name="size" value="XS" required>
+                                            <span>XS</span>
+                                        </label>
+                                        <label class="size-btn">
+                                            <input type="radio" name="size" value="S (38)">
+                                            <span>S (38)</span>
+                                        </label>
+                                        <label class="size-btn">
+                                            <input type="radio" name="size" value="M (40)">
+                                            <span>M (40)</span>
+                                        </label>
+                                        <label class="size-btn">
+                                            <input type="radio" name="size" value="L (42)">
+                                            <span>L (42)</span>
+                                        </label>
+                                        <label class="size-btn">
+                                            <input type="radio" name="size" value="XL (44)">
+                                            <span>XL (44)</span>
+                                        </label>
+                                        <label class="size-btn">
+                                            <input type="radio" name="size" value="XXL (46)">
+                                            <span>XXL (46)</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="payment-section">
+                                    <h3 class="payment-title"><i class="fas fa-credit-card"></i> পেমেন্ট পদ্ধতি</h3>
+                                    <div class="payment-methods" id="payment-methods">
+                                        <label class="payment-card active">
+                                            <input type="radio" name="payment_method" value="cod" checked>
+                                            <i class="fas fa-truck-moving"></i>
+                                            <span>ক্যাশ অন ডেলিভারি</span>
+                                        </label>
+                                        <label class="payment-card">
+                                            <input type="radio" name="payment_method" value="bkash">
+                                            <img src="assets/bkash.webp" alt="bkash">
+                                            <span>বিকাশ</span>
+                                        </label>
+                                        <label class="payment-card">
+                                            <input type="radio" name="payment_method" value="nagad">
+                                            <img src="https://
+                                                alt="nagad">
+                                            <span>নগদ</span>
+                                        </label>
+                                    </div>
+
+                                    <div id="bkash-instruction" class="payment-instruction-professional">
+                                        <div class="payment-instruction-header">
+                                            <img src="assets/bkash.webp" alt="bKash">
+                                            <h4>বিকাশ পেমেন্ট ইনস্ট্রাকশন</h4>
+                                        </div>
+                                        <div class="payment-steps">
+                                            <div class="step">
+                                                <span class="step-count">১</span>
+                                                <p>বিকাশ অ্যাপ বা *২৪৭# ডায়াল করে নিচের নাম্বারে <strong>সেন্ড
+                                                        মানি</strong> করুন।</p>
+                                            </div>
+                                            <div class="account-box">
+                                                <div class="account-info">
+                                                    <span class="label">বিকাশ পার্সোনাল নম্বর:</span>
+                                                    <span class="number" id="bkash-num">+৮৮০ ১৯৭৭৭৫৫১০৬</span>
+                                                </div>
+                                                <button type="button" class="copy-action"
+                                                    onclick="copyText('bkash-num')">
+                                                    <i class="fas fa-clone"></i> কপি করুন
+                                                </button>
+                                            </div>
+                                            <div class="step">
+                                                <span class="step-count">২</span>
+                                                <p>পেমেন্ট সফল হলে আসা <strong>TrxID</strong> বা <strong>ট্রানজাকশন
+                                                        আইডি</strong> নিচের ঘরে লিখুন।</p>
+                                            </div>
+                                            <div class="transaction-input-wrapper">
+                                                <i class="fas fa-fingerprint"></i>
+                                                <input type="text" id="bkash-trx" placeholder="যেমন: 8N7A6D5W"
+                                                    class="trx-input">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="nagad-instruction" class="payment-instruction-professional">
+                                        <div class="payment-instruction-header">
+                                            <img src="https://
+                                                alt="Nagad">
+                                            <h4>নগদ পেমেন্ট ইনস্ট্রাকশন</h4>
+                                        </div>
+                                        <div class="payment-steps">
+                                            <div class="step">
+                                                <span class="step-count">১</span>
+                                                <p>নগদ অ্যাপ বা *১৬৭# ডায়াল করে নিচের নাম্বারে <strong>সেন্ড
+                                                        মানি</strong> করুন।</p>
+                                            </div>
+                                            <div class="account-box">
+                                                <div class="account-info">
+                                                    <span class="label">নগদ পার্সোনাল নম্বর:</span>
+                                                    <span class="number" id="nagad-num">+৮৮০ ১৯৭৭৭৫৫১০৬</span>
+                                                </div>
+                                                <button type="button" class="copy-action"
+                                                    onclick="copyText('nagad-num')">
+                                                    <i class="fas fa-clone"></i> কপি করুন
+                                                </button>
+                                            </div>
+                                            <div class="step">
+                                                <span class="step-count">২</span>
+                                                <p>পেমেন্ট সফল হলে আসা <strong>TrxID</strong> বা <strong>ট্রানজাকশন
+                                                        আইডি</strong> নিচের ঘরে লিখুন।</p>
+                                            </div>
+                                            <div class="transaction-input-wrapper">
+                                                <i class="fas fa-fingerprint"></i>
+                                                <input type="text" id="nagad-trx" placeholder="যেমন: 7F6E5D4C"
+                                                    class="trx-input">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="order-summary-card reveal">
+                                <h3 class="summary-title"><i class="fas fa-receipt"></i> অর্ডার সামারি</h3>
+                                <div class="summary-list">
+                                    <div class="summary-item">
+                                        <span>সাবটোটাল</span>
+                                        <span id="summary-subtotal">৳ ০.০০</span>
+                                    </div>
+                                    <div class="summary-item delivery-selection">
+                                        <span>ডেলিভারি চার্জ</span>
+                                        <div class="delivery-radios">
+                                            <label>
+                                                <input type="radio" name="delivery" value="80" checked>
+                                                <div class="radio-custom"></div>
+                                                <span>ঢাকার ভেতরে (৳ ৮০)</span>
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="delivery" value="150">
+                                                <div class="radio-custom"></div>
+                                                <span>ঢাকার বাইরে (৳ ১৫০)</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="summary-item total">
+                                        <span>সর্বমোট</span>
+                                        <span id="summary-total">৳ ০.০০</span>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn-confirm-order">
+                                    <i class="fas fa-shopping-basket"></i> অর্ডার কনফার্ম করুন
+                                </button>
+                                <div class="security-badge">
+                                    <i class="fas fa-shield-alt"></i> ১০০% নিরাপদ কেনাকাটা
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container footer-top">
+            <div class="footer-grid">
+                <div class="footer-col brand-col">
+                    <div class="logo">
+                        <span class="logo-accent">Premium</span> Panjabi
+                    </div>
+                    <p class="footer-desc">আমরা বিশ্বাস করি আভিজাত্য এবং আরামের এক অনন্য সমন্বয়। সারা বাংলাদেশে
+                        নির্ভরযোগ্যতার সাথে পণ্য পৌঁছে দিচ্ছি।</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-title">কুইক লিঙ্ক</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#home">হোম পেজ</a></li>
+                        <li><a href="index.html#collection">কালেকশন</a></li>
+                        <li><a href="index.html#about">আমাদের সম্পর্কে</a></li>
+                        <li><a href="index.html#reviews">রিভিউ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-title">পলিসি ও সাপোর্ট</h4>
+                    <ul class="footer-links">
+                        <li><a href="policies.html#refund">রিফান্ড পলিসি</a></li>
+                        <li><a href="policies.html#privacy">প্রাইভেসি পলিসি</a></li>
+                        <li><a href="policies.html#terms">শর্তাবলী</a></li>
+                        <li><a href="address.html">আমাদের ঠিকানা</a></li>
+                        <li><a href="contact.html">যোগাযোগ করুন</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col newsletter-col">
+                    <h4 class="footer-title">নিউজলেটার</h4>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="আপনার ইমেইল দিন" required>
+                        <button type="submit" class="btn btn-primary">সাবস্ক্রাইব</button>
+                    </form>
+                    <div class="footer-payment-info" style="margin-top: 20px;">
+                        <img src="assets/bkash.webp" alt="bKash" style="height: 30px; object-fit: contain;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container bottom-content">
+                <p>&copy; ২০২৪ <span class="highlight">প্রিমিয়াম পাঞ্জাবি</span>। সর্বস্বত্ব সংরক্ষিত।</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const originHostname = window.location.hostname || 'localhost';
+            const API_URL = (window.location.protocol === 'file:' || ((originHostname === '127.0.0.1' || originHostname === 'localhost') && window.location.port !== '3000')) ? `http://${originHostname}:3000/api` : '/api';
+            
+            let pixelId = null;
+            try {
+                const sRes = await fetch(`${API_URL}/settings`);
+                const settings = await sRes.json();
+                pixelId = settings.fbPixelId;
+                if (pixelId) initFacebookPixel(pixelId);
+
+                
+                if (settings.fbDomainVerify) {
+                    let meta = document.querySelector('meta[name="facebook-domain-verification"]');
+                    if (!meta) {
+                        meta = document.createElement('meta');
+                        meta.name = "facebook-domain-verification";
+                        document.head.appendChild(meta);
+                    }
+                    meta.content = settings.fbDomainVerify;
+                }
+            } catch (e) { console.error('Settings fetch error:', e); }
+
+            function initFacebookPixel(id) {
+                !function (f, b, e, v, n, t, s) {
+                    if (f.fbq) return; n = f.fbq = function () {
+                        n.callMethod ?
+                            n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                    };
+                    if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+                    n.queue = []; t = b.createElement(e); t.async = !0;
+                    t.src = v; s = b.getElementsByTagName(e)[0];
+                    s.parentNode.insertBefore(t, s)
+                }(window, document, 'script',
+                    'https://connect.facebook.net/en_US/fbevents.js');
+                fbq('init', id);
+                fbq('track', 'PageView');
+            }
+
+            const params = new URLSearchParams(window.location.search);
+            const title = params.get('product') || 'প্রিমিয়াম পাঞ্জাবি';
+            const bnToEn = n => n.replace(/[০-৯]/g, d => "০১২৩৪৫৬৭৮৯".indexOf(d));
+            const priceVal = params.get('price');
+            const unitPrice = parseInt(bnToEn(priceVal || '0')) || 0;
+            const imgsParam = params.get('imgs') || '';
+            let images = imgsParam ? imgsParam.split(',') : [];
+
+            
+            if (title.includes('লাক্সারি গোল্ডেন গর্জিয়াস পাঞ্জাবি')) {
+                const luxuryMedia = [
+                    'assets/luxury-gold-3.mp4',
+                    'assets/luxury-gold-1.webp',
+                    'assets/luxury-gold-2.webp'
+                ];
+                images = [...new Set([...luxuryMedia, ...images])];
+            }
+
+            
+            document.getElementById('selected-product-title').innerText = title;
+            document.getElementById('selected-product-price').innerText = unitPrice.toLocaleString();
+
+            
+            document.getElementById('cart-item-title').innerText = title;
+            document.getElementById('cart-item-price').innerText = unitPrice.toLocaleString();
+
+
+            const mainDisplayImg = document.getElementById('main-display-img');
+            const thumbCarousel = document.getElementById('thumb-carousel');
+            const zoomContainer = document.getElementById('zoom-container');
+
+            const isVideo = url => url.toLowerCase().endsWith('.mp4');
+
+            const updateDisplay = (url) => {
+                if (isVideo(url)) {
+                    zoomContainer.innerHTML = `<video id="main-display-img" src="${url}" autoplay loop muted playsinline style="width:100%; height:100%; object-fit:contain;"></video>`;
+                } else {
+                    zoomContainer.innerHTML = `<img id="main-display-img" src="${url}" alt="Product">`;
+                }
+            };
+
+            if (images.length > 0) {
+                updateDisplay(images[0]);
+
+                images.forEach((imgSrc, i) => {
+                    const thumb = document.createElement('div');
+                    thumb.classList.add('thumb');
+                    if (i === 0) thumb.classList.add('active');
+
+                    if (isVideo(imgSrc)) {
+                        thumb.innerHTML = `<video src="${imgSrc}" muted style="width:100%; height:100%; object-fit:cover;"></video>`;
+                    } else {
+                        thumb.innerHTML = `<img src="${imgSrc}" alt="thumb" style="width:100%; height:100%; object-fit:cover;">`;
+                    }
+
+                    thumb.addEventListener('click', () => {
+                        updateDisplay(imgSrc);
+                        document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+                        thumb.classList.add('active');
+                    });
+                    thumbCarousel.appendChild(thumb);
+                });
+
+                zoomContainer.addEventListener('mousemove', (e) => {
+                    const activeMedia = document.getElementById('main-display-img');
+                    if (!activeMedia) return;
+                    const rect = zoomContainer.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    activeMedia.style.transformOrigin = `${x}% ${y}%`;
+                    zoomContainer.classList.add('zoom-active');
+                });
+                zoomContainer.addEventListener('mouseleave', () => {
+                    const activeMedia = document.getElementById('main-display-img');
+                    zoomContainer.classList.remove('zoom-active');
+                    if (activeMedia) activeMedia.style.transformOrigin = 'center center';
+                });
+            }
+
+            
+            const qtyInput = document.getElementById('cart-qty-input');
+            const plusBtn = document.getElementById('plus-qty');
+            const minusBtn = document.getElementById('minus-qty');
+            const cartSubtotal = document.getElementById('cart-item-subtotal');
+            const summarySubtotal = document.getElementById('summary-subtotal');
+            const summaryTotal = document.getElementById('summary-total');
+            const deliveryRadios = document.querySelectorAll('input[name="delivery"]');
+
+            const updateTotals = () => {
+                const qty = parseInt(qtyInput.value) || 1;
+                const subtotal = unitPrice * qty;
+                const deliveryCharge = parseInt(document.querySelector('input[name="delivery"]:checked').value);
+                const total = subtotal + deliveryCharge;
+
+                cartSubtotal.innerText = subtotal.toLocaleString();
+                summarySubtotal.innerText = `৳ ${subtotal.toLocaleString()}`;
+                summaryTotal.innerText = `৳ ${total.toLocaleString()}`;
+            };
+
+            plusBtn.addEventListener('click', () => {
+                qtyInput.value = parseInt(qtyInput.value) + 1;
+                updateTotals();
+            });
+
+            minusBtn.addEventListener('click', () => {
+                if (parseInt(qtyInput.value) > 1) {
+                    qtyInput.value = parseInt(qtyInput.value) - 1;
+                    updateTotals();
+                }
+            });
+
+            deliveryRadios.forEach(radio => radio.addEventListener('change', updateTotals));
+            updateTotals();
+
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('reveal-active');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            
+            const paymentOptions = document.querySelectorAll('input[name="payment_method"]');
+            const bkashInstr = document.getElementById('bkash-instruction');
+            const nagadInstr = document.getElementById('nagad-instruction');
+
+            paymentOptions.forEach(opt => {
+                opt.addEventListener('change', () => {
+                    document.querySelectorAll('.payment-card').forEach(c => c.classList.remove('active'));
+                    opt.closest('.payment-card').classList.add('active');
+                    bkashInstr.classList.remove('active');
+                    nagadInstr.classList.remove('active');
+                    if (opt.value === 'bkash') bkashInstr.classList.add('active');
+                    if (opt.value === 'nagad') nagadInstr.classList.add('active');
+                });
+            });
+
+            window.copyText = (id) => {
+                const text = document.getElementById(id).innerText;
+                navigator.clipboard.writeText(text).then(() => alert('কপি করা হয়েছে!'));
+            };
+
+            
+            const orderForm = document.getElementById('order-form');
+            orderForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('customer-name').value;
+                const phone = document.getElementById('customer-phone').value;
+                const address = document.getElementById('customer-address').value;
+                const sizeSelector = document.querySelector('input[name="size"]:checked');
+
+                if (!sizeSelector) { alert('দয়া করে সাইজ নির্বাচন করুন'); return; }
+
+                const size = sizeSelector.value;
+                const qty = qtyInput.value;
+                const deliveryChargeValue = document.querySelector('input[name="delivery"]:checked').value;
+                const deliveryArea = deliveryChargeValue == "80" ? "Inside Dhaka" : "Outside Dhaka";
+                const subtotal = unitPrice * qty;
+                const total = subtotal + parseInt(deliveryChargeValue);
+
+                const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
+                let paymentDetails = "";
+
+                if (paymentMethod === 'bkash') {
+                    const trx = document.getElementById('bkash-trx').value;
+                    if (!trx) { alert('বিকাশ ট্রানজাকশন আইডি দিন'); return; }
+                    paymentDetails = `\n*পেমেন্ট:* বিকাশ (TrxID: ${trx})`;
+                } else if (paymentMethod === 'nagad') {
+                    const trx = document.getElementById('nagad-trx').value;
+                    if (!trx) { alert('নগদ ট্রানজাকশন আইডি দিন'); return; }
+                    paymentDetails = `\n*পেমেন্ট:* নগদ (TrxID: ${trx})`;
+                } else {
+                    paymentDetails = `\n*পেমেন্ট:* ক্যাশ অন ডেলিভারি`;
+                }
+
+                const message = `*নতুন অর্ডার!* 🚀\n\n*পণ্য:* ${title}\n*পরিমাণ:* ${qty}\n*মূল্য:* ৳ ${unitPrice}\n*সাবটোটাল:* ৳ ${subtotal}\n*সাইজ:* ${size}\n----------------------\n*নাম:* ${name}\n*ফোন:* ${phone}\n*ঠিকানা:* ${address}\n*ডেলিভারি:* ${deliveryArea} (৳ ${deliveryChargeValue})\n*মোট বিল:* ৳ ${total}${paymentDetails}\n----------------------\nঅর্ডারটি দ্রুত সম্পন্ন করার জন্য ধন্যবাদ!`;
+
+                
+                const orderData = {
+                    customer: { name, phone, address },
+                    product: title,
+                    quantity: qty,
+                    size: size,
+                    price: unitPrice,
+                    deliveryCharge: deliveryChargeValue,
+                    total: total,
+                    paymentMethod: paymentMethod,
+                    status: 'Pending'
+                };
+
+                fetch(`${API_URL}/orders`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(orderData)
+                }).then(() => {
+                    
+                    if (window.fbq && pixelId) {
+                        fbq('track', 'Purchase', {
+                            content_name: title,
+                            value: total,
+                            currency: 'BDT'
+                        });
+                    }
+                    showSuccessModal(message);
+                }).catch(err => {
+                    console.error('Error saving order:', err);
+                    
+                    showSuccessModal(message);
+                });
+            });
+
+            
+            function showSuccessModal(whatsappMsg) {
+                const modalHtml = `
+                    <div id="order-success-overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:flex; align-items:center; justify-content:center; z-index:10000; animation: fadeIn 0.3s ease;">
+                        <div style="background:white; padding:40px; border-radius:30px; text-align:center; max-width:500px; width:90%; box-shadow:0 20px 50px rgba(0,0,0,0.3); transform: scale(0.9); animation: modalBounce 0.5s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+                            <div style="width:80px; height:80px; background:#dcfce7; color:#166534; font-size:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px;">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h2 style="color:var(--primary); margin-bottom:15px; font-size:1.8rem;">অর্ডার সফল হয়েছে!</h2>
+                            <p style="color:#4a5568; margin-bottom:25px; font-size:1.1rem; line-height:1.6;">আপনার অর্ডারটি কনফার্ম হয়েছে। আমাদের প্রতিনিধি আপনার সাথে খুব শীঘ্রই যোগাযোগ করবে।</p>
+                            <button id="close-success-modal" class="btn-confirm-order" style="margin-top:0;">ঠিক আছে</button>
+                        </div>
+                    </div>
+                `;
+
+                document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+                const style = document.createElement('style');
+                style.innerHTML = `
+                    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+                    @keyframes modalBounce { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+                `;
+                document.head.appendChild(style);
+
+                
+                const closeBtn = document.getElementById('close-success-modal');
+                closeBtn.addEventListener('click', () => {
+                    document.getElementById('order-success-overlay').remove();
+                    
+                    document.getElementById('order-form').reset();
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
+
+
+
+
+

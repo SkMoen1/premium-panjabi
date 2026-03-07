@@ -1,0 +1,30 @@
+[
+  {
+    "approved": true,
+    "createdAt": "2026-02-21T11:56:43.502Z",
+    "email": "he@gmail.com",
+    "password": "$2a$10$rf/QoWlHoqyM1HifV8aoaOrgNUw4GVRrdh.k.iIUaCKkolW/Q/U.K",
+    "role": "maintenance",
+    "status": "active",
+    "username": "W"
+  },
+  {
+    "approved": false,
+    "createdAt": "2026-02-21T03:05:00.145Z",
+    "email": "skmoen1971@gmail.com",
+    "password": "$2a$10$zSmmct6/s6Mfyygx98Ym9u.WE4GRKZCWd2RX3emGnkXo1Gqhpv73u",
+    "role": "maintenance",
+    "status": "pending",
+    "username": "moen"
+  },
+  {
+    "approved": true,
+    "authProvider": "firebase-email",
+    "createdAt": "2026-02-21T04:36:37.015Z",
+    "email": "skmoen18@gmail.com",
+    "password": "",
+    "role": "full_admin",
+    "status": "active",
+    "username": "skmoen18"
+  }
+]
